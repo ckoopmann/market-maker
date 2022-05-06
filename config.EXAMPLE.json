@@ -1,0 +1,21 @@
+{
+    "cryptowatchApiKey": "aaaaxxx",
+    "ethPrivKeys": [
+        "<ENTERYOURPRIVATEKEYHERE>",
+        ""
+    ],
+    "zigzagChainId": 1,
+    "zigzagWsUrl": "wss://zigzag-exchange.herokuapp.com",
+    "pairs": {
+        "icETH-ETH": {
+            "priceFeedPrimary": "uniswapv3:0xe5d028350093a743A9769e6FD7F5546eEdDAA320",
+            "priceFeedSecondary": "constant:1.007146808532045",
+            "slippageRate": 1e-5,
+            "maxSize": 0.5,
+            "minSize": 0.0003,
+            "minSpread": 0.01,
+            "active": true,
+            "numOrdersIndicated": 5
+        }
+    }
+}
