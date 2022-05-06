@@ -4,6 +4,7 @@ import ethers from 'ethers';
 import dotenv from 'dotenv';
 import fetch from 'node-fetch';
 import fs from 'fs';
+import util from 'util';
 
 dotenv.config();
 
@@ -660,6 +661,7 @@ async function uniswapV3Update() {
             const [provider, decimalsRatio] = UNISWAP_V3_PROVIDERS[key];
             const slot0 = await provider.slot0();
             PRICE_FEEDS[key] = (slot0.sqrtPriceX96*slot0.sqrtPriceX96*decimalsRatio) / (2**192);
+            console.log("Succesfull updated from uniswap", {price: (slot0.sqrtPriceX96*slot0.sqrtPriceX96*decimalsRatio) / (2**192), key: key});
         }));
         // reset error counter if successful 
         uniswap_error_counter = 0;
@@ -725,6 +727,7 @@ function indicateLiquidity (pairs = MM_CONFIG.pairs) {
         const msg = { op: "indicateliq2", args: [CHAIN_ID, marketId, liquidity] };
         try {
             zigzagws.send(JSON.stringify(msg));
+            console.log("Sucessfully indicated liquidity", util.inspect(msg, {showHidden: false, depth: null, colors: true}));
         } catch (e) {
             console.error("Could not send liquidity");
             console.error(e);
