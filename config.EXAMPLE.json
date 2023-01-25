@@ -16,6 +16,16 @@
             "minSpread": 0.01,
             "active": true,
             "numOrdersIndicated": 5
+        },
+        "icETH-USDT": {
+            "priceFeedPrimary": "uniswapv3Multihop:0xe5d028350093a743A9769e6FD7F5546eEdDAA320-0x11b815efB8f581194ae79006d24E0d814B7697F6",
+            "priceFeedSecondary": "",
+            "slippageRate": 1e-5,
+            "maxSize": 0.5,
+            "minSize": 0.0003,
+            "minSpread": 0.01,
+            "active": true,
+            "numOrdersIndicated": 5
         }
     }
 }
