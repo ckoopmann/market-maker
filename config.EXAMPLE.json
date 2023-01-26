@@ -17,8 +17,53 @@
             "active": true,
             "numOrdersIndicated": 5
         },
-        "icETH-USDT": {
-            "priceFeedPrimary": "uniswapv3Multihop:0xe5d028350093a743A9769e6FD7F5546eEdDAA320-0x11b815efB8f581194ae79006d24E0d814B7697F6",
+        "icETH-wstETH": {
+            "priceFeedPrimary": "uniswapv3Multihop:0xe5d028350093a743A9769e6FD7F5546eEdDAA320-0xD340B57AAcDD10F96FC1CF10e15921936F41E29c",
+            "priceFeedSecondary": "constant:10.007146808532045",
+            "priceFeedSecondary": "",
+            "slippageRate": 1e-5,
+            "maxSize": 0.5,
+            "minSize": 0.0003,
+            "minSpread": 0.01,
+            "active": true,
+            "numOrdersIndicated": 5
+        },
+        "icETH-USDC": {
+            "priceFeedPrimary": "uniswapv3Multihop:0xe5d028350093a743A9769e6FD7F5546eEdDAA320-0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640",
+            "priceFeedSecondary": "constant:10.007146808532045",
+            "priceFeedSecondary": "",
+            "slippageRate": 1e-5,
+            "maxSize": 0.5,
+            "minSize": 0.0003,
+            "minSpread": 0.01,
+            "active": true,
+            "numOrdersIndicated": 5
+        },
+        "dsETH-icETH": {
+            "priceFeedPrimary": "uniswapv3Multihop:0xDBe1BC2b5dBd1022793D5aC3D52d1C8624B33E5b-0xe5d028350093a743A9769e6FD7F5546eEdDAA320",
+            "priceFeedSecondary": "constant:10.007146808532045",
+            "priceFeedSecondary": "",
+            "slippageRate": 1e-5,
+            "maxSize": 0.5,
+            "minSize": 0.0003,
+            "minSpread": 0.01,
+            "active": true,
+            "numOrdersIndicated": 5
+        },
+        "dsETH-USDC": {
+            "priceFeedPrimary": "uniswapv3Multihop:0xDBe1BC2b5dBd1022793D5aC3D52d1C8624B33E5b-0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640",
+            "priceFeedSecondary": "constant:10.007146808532045",
+            "priceFeedSecondary": "",
+            "slippageRate": 1e-5,
+            "maxSize": 0.5,
+            "minSize": 0.0003,
+            "minSpread": 0.01,
+            "active": true,
+            "numOrdersIndicated": 5
+        },
+        "dsETH-wstETH": {
+            "priceFeedPrimary": "uniswapv3Multihop:0xDBe1BC2b5dBd1022793D5aC3D52d1C8624B33E5b-0xD340B57AAcDD10F96FC1CF10e15921936F41E29c",
+            "priceFeedSecondary": "constant:10.007146808532045",
             "priceFeedSecondary": "",
             "slippageRate": 1e-5,
             "maxSize": 0.5,
