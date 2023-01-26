@@ -71,6 +71,38 @@
             "minSpread": 0.01,
             "active": true,
             "numOrdersIndicated": 5
+        },
+        "BED-USDC": {
+            "priceFeedPrimary": "uniswapv3Multihop:0x779DFffB81550BF503C19d52b1e91e9251234fAA-0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640",
+            "priceFeedSecondary": "constant:100000.007146808532045",
+            "priceFeedSecondary": "",
+            "slippageRate": 1e-5,
+            "maxSize": 0.5,
+            "minSize": 0.0003,
+            "minSpread": 0.01,
+            "active": true,
+            "numOrdersIndicated": 5
+        },
+        "DPI-USDC": {
+            "priceFeedPrimary": "uniswapv3Multihop:0x9359c87B38DD25192c5f2b07b351ac91C90E6ca7-0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640",
+            "priceFeedSecondary": "constant:100000.007146808532045",
+            "priceFeedSecondary": "", "slippageRate": 1e-5,
+            "maxSize": 0.5,
+            "minSize": 0.0003,
+            "minSpread": 0.01,
+            "active": true,
+            "numOrdersIndicated": 5
+        },
+        "MVI-USDC": {
+            "priceFeedPrimary": "uniswapv3Multihop:0x06aDA8f74D99C6C200672b02E5C3341866cA3bFB-0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640",
+            "priceFeedSecondary": "constant:100000.007146808532045",
+            "priceFeedSecondary": "",
+            "slippageRate": 1e-5,
+            "maxSize": 0.5,
+            "minSize": 0.0003,
+            "minSpread": 0.01,
+            "active": true,
+            "numOrdersIndicated": 5
         }
     }
 }
