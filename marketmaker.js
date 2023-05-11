@@ -13,6 +13,7 @@ const OPEN_ORDERS = {};
 const NONCES = {};
 const WALLETS = {};
 const MARKETS = {};
+const CUSTOM_API_PROVIDERS = [];
 const CHAINLINK_PROVIDERS = {};
 const UNISWAP_V3_PROVIDERS = {};
 const UNISWAP_V3_MULTIHOP_PROVIDERS = {};
@@ -516,7 +517,8 @@ async function setupPriceFeeds() {
     const cryptowatch = [],
         chainlink = [],
         uniswapV3 = [],
-        uniswapV3Multihop = [];
+        uniswapV3Multihop = [],
+        customApi = [];
     for (let market in MM_CONFIG.pairs) {
         const pairConfig = MM_CONFIG.pairs[market];
         if(!pairConfig.active) { continue; }
@@ -563,6 +565,11 @@ async function setupPriceFeeds() {
                 case 'constant':
                     PRICE_FEEDS['constant:'+id] = parseFloat(id);
                     break;
+                case "customapi":
+                    if (!customApi.includes(id)) {
+                        customApi.push(id);
+                    }
+                    break;
                 default:
                     throw new Error("Price feed provider "+provider+" is not available.")
                     break;
@@ -573,9 +580,57 @@ async function setupPriceFeeds() {
   if(cryptowatch.length > 0) await cryptowatchWsSetup(cryptowatch);
   if(uniswapV3.length > 0) await uniswapV3Setup(uniswapV3);
   if(uniswapV3Multihop.length > 0) await uniswapV3MultihopSetup(uniswapV3Multihop);
+  if(customApi.length > 0) await customApiSetup(customApi);
 
   console.log(PRICE_FEEDS);
 }
+
+async function customApiSetup(customApiMarketIds) {
+    await Promise.all(customApiMarketIds.map(async (customApiMarketId) => {
+        try {
+            CUSTOM_API_PROVIDERS.push(customApiMarketId);
+            PRICE_FEEDS['customApi:'+ customApiMarketId] = await getCustomApiPrice(customApiMarketId);
+        } catch (e) {
+            console.error("Could not set price feed for customaApi:" + customApiMarketId, e.toString());
+        }
+    }
+    ))
+    setInterval(customApiUpdate, 30000);
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function customApiUpdate() {
+    return Promise.all(CUSTOM_API_PROVIDERS.map(async (customApiMarketId) => {
+        try{
+            PRICE_FEEDS['customApi:'+ customApiMarketId] = await getCustomApiPrice(customApiMarketId);
+        } catch(e) {
+            console.error("Could not update price feed for customaApi:" + customApiMarketId, e.toString());
+        }
+    }))
+}
+
+
+async function getCustomApiPrice(customApiMarketId) {
+    const splitMarketId = customApiMarketId.split("|");
+    if(splitMarketId.length != 2) {
+        throw new Error("Could not parse customApiMarketId contains too many elements: " + customApiMarketId);
+    }
+    const [url, jsonPath] = splitMarketId;
+    const fullUrl = "https://" + url;
+    console.log("Fetching price from customApi: " + fullUrl);
+    const response = await fetch(fullUrl);
+    const json = await response.json();
+    console.log("Json response: " + json.toString());
+    console.log("Extracting price at:" + jsonPath);
+    const price = jsonPath.split(".").reduce((o,i)=>o[i], json);
+    console.log("Price: " + price);
+    return price;
+}
+
+
 
 async function cryptowatchWsSetup(cryptowatchMarketIds) {
     // Set initial prices
